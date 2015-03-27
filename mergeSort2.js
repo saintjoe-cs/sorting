@@ -1,25 +1,30 @@
-/ The number of stack traces that will be logged in the console.
-// We call console.log() when we reach the base case in our
-// mergesort function, which will be the maximum recursive depth.
-// We're only going to call this the first few times, as
-// it can really bog things down otherwise.
-var stacktraces = 0;
 
 // The array we will be sorting.
 var big_array = [];
 
+var counter = 1;
+
 // Build our array with numbers going in descending order.
 // The array size, max, can be larger, but things slow down 
 // and start to get wonky at about 2^25.
-var max = Math.pow(2, 20);
+// BC note: they get wonky earlier than that
+var max = Math.pow(2, 5);
 for (var i = 0; i < max; i++){
-    big_array.push(max - i);
+    big_array[i] =  Math.floor(Math.random() * (100));
 }
+
+// Show your work!!
+print('Before: ');
+print(JSON.stringify(big_array));
 
 big_array = mergesort(big_array);
 
+print('After ' + counter + ' passes');
+print(JSON.stringify(big_array));
+
 // Standard merge
 function merge(a,b){
+    // This one should be pretty easy to figure out
     var result = [];
     var alen = a.length;
     var blen = b.length;
@@ -47,23 +52,20 @@ function merge(a,b){
 }
 
 // Standard recursive mergesort
-function mergesort(){
-    var length = this.dataStore.length;
+function mergesort(array){
+    var length = array.length;
     if (length <= 1){
-        if (stacktraces < 10){
-            // This will print a call stack to the console the
-            // first ten times our mergesort reaches the base case.
-            // It should be clear that the maximum recursive depth
-            // of our mergesort function is n+1, where our array
-            // has on the order of 2^n items.
-            console.trace()
-            stacktraces++;
-        }
-        return lst;
+	// This is the base case for the recursion
+        return array;
     }
+    // Divide and conquer: each piece is half the size of the starting array
     var q = Math.floor(length/2)
-    var left = mergesort(this.dataStore.slice(0,q));
-    var right = mergesort(this.dataStore.slice(q));
+    // increment "recursion" counter
+    counter++
+    // print('Recursing on pieces of length: ' + q + ' and counter at: ' + counter);
+    var left = mergesort(array.slice(0,q));
+    var right = mergesort(array.slice(q));
+    // print('Merging left:' + left.length + ' right: ' + right.length);
     return merge(left, right);
  }
 
