@@ -1,5 +1,6 @@
 function qSort(arr)
 {
+print('Entering qsrt with an array of size ' + arr.length + JSON.stringify(arr));
   if (arr.length == 0) {
     return [];
     }
@@ -7,12 +8,12 @@ function qSort(arr)
   var right = [];
   var pivot = arr[0];
   for (var i = 1; i < arr.length; i++) {
-    print("pivot: " + pivot + " current element: " + arr[i]);
+    // print("pivot: " + pivot + " current element: " + arr[i]);
     if (arr[i] < pivot) {
-      print("moving " + arr[i] + " to the left");
+      // print("moving " + arr[i] + " to the left");
       left.push(arr[i]);
     } else {
-      print("moving " + arr[i] + " to the right");
+      // print("moving " + arr[i] + " to the right");
       right.push(arr[i]);
       }
     }
