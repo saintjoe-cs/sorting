@@ -1,5 +1,5 @@
 load ("sortingCode.js");
-var nums = new CArray(23);
+var nums = new CArray(32);
 nums.setData();
 print(nums.toString());
 nums.mergeSort();
