@@ -1,7 +1,6 @@
-
 // The array we will be sorting.
 var big_array = [];
-
+// This was added by Capouch for his class's benefit!!
 var counter = 1;
 
 // Build our array with numbers going in descending order.
@@ -28,8 +27,10 @@ function merge(a,b){
     var result = [];
     var alen = a.length;
     var blen = b.length;
+    // As long as either A or B or both have elements go again
     while (alen > 0 || blen > 0){
         if (alen > 0 && blen > 0){
+	    // Both A and B are still populated
             if (a[0] < b[0]){
                 result.push(a.shift());
                 alen -= 1;
@@ -39,15 +40,17 @@ function merge(a,b){
                 blen -= 1;
             }
         }
+	// B has run out, but A has not
         else if (alen > 0){
             result.push(a.shift());
             alen -= 1;
-        }
+        }	
+	// A has run out, but B has not
         else if (blen > 0){
             result.push(b.shift());
             blen -= 1;
         }
-    }
+    } 
     return result;
 }
 
@@ -61,8 +64,8 @@ function mergesort(array){
     // Divide and conquer: each piece is half the size of the starting array
     var q = Math.floor(length/2)
     // increment "recursion" counter
-    counter++
-    // print('Recursing on pieces of length: ' + q + ' and counter at: ' + counter);
+    counter++;
+    print('Recursing on pieces of length: ' + q + ' and counter at: ' + counter);
     var left = mergesort(array.slice(0,q));
     var right = mergesort(array.slice(q));
     // print('Merging left:' + left.length + ' right: ' + right.length);
